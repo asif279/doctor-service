@@ -1,0 +1,47 @@
+.abanner{
+    background: url(../../../assets/images/appointment.png);
+    margin-top: 150px;
+    width: 1290px;
+    margin-bottom: 120px;
+height: 400px;
+position: relative;
+display: grid;
+grid-template-columns: 6fr 6fr;
+border-radius: 9px;
+}
+.img_doctor{
+    width: 500.84px;
+    height: 500px;
+    position: absolute;
+    left: 135.19px;
+  
+top: -98px;
+}
+.img_div{
+    margin-right: 80px;
+}
+.abanner_left{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.title1{
+    font-size: 20px;
+    color: white;
+    font-weight: 550;
+}
+.title2{
+    font-weight: 700;
+    font-size: 25px;
+    color: orange;
+}
+.ds{
+    line-height: 25px;
+    color: white;
+    font-weight: 500;
+    width: 500.74px;
+    font-family: 'Open Sans';
+height: 141px;
+}

@@ -1,0 +1,46 @@
+.card_item{
+    border: 2px solid black;
+    
+   margin: 19px;
+   padding: 10px;
+    border-radius: 8px;
+   background: black;
+  
+   
+   transition: background 1s;
+   display: flex;
+   
+}
+.card_item:hover{
+    background: rgb(61, 130, 179);
+    
+   
+
+}
+
+
+.card_title{
+    font-family: 'Lobster Two', cursive;
+    font-size: 21px;
+
+}
+.des{
+    font-family: 'Open Sans', sans-serif;
+}
+.img_card{
+    width: 16%;
+   margin: 10px;
+   padding: 12px;
+}
+
+  
+
+.card_content{
+    
+    color: white;
+   margin-right: auto;
+   margin-bottom: auto;
+   margin-top: auto;
+    
+    
+}

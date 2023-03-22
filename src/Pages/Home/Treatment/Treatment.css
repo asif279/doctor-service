@@ -1,0 +1,15 @@
+
+.img_treatment{
+    width: 450px;
+    height: 480px;
+    margin: 20px;
+    border-radius: 10px;
+}
+.rightW{
+    margin-top: 50px;
+    width: 70%;
+    margin-left: -15px;
+}
+.des{
+    color: orange;
+}
