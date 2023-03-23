@@ -1,12 +1,61 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import {AuthContext} from '../../context/AuthProvider'
 
 const SignUp = () => {
     const { register, handleSubmit,formState: { errors } } = useForm();
+    const {createUser,signInGoogle,updateUser} =useContext(AuthContext);
+    const [loginerror,setLoginerror]=useState('');
+    const navigate = useNavigate();
+    const location=useLocation();
+    const from=location.state?.from?.pathname || '/appointment';
   const handleSignUp = data =>{
     console.log(data);
-  }
+    setLoginerror('');
+    createUser(data.email,data.password)
+    .then(res=>{
+        const user=res.user;
+        console.log(user);
+        navigate(from,{replace:true});
+        toast("User Created Succesfully");
+        const userInfo={
+          displayName:data.name
+        }
+        updateUser(userInfo)
+        .then(() => {
+          // Profile updated!
+          // ...
+        }).catch((error) => {
+          // An error occurred
+          // ...
+        });
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode,errorMessage);
+        // ...
+      });
+}
+const handleGoogle =()=>{
+  signInGoogle()
+  .then(res=>{
+    const user=res.user;
+    console.log(user);
+    navigate(from,{replace:true})
+  })
+  .catch((error) => {
+  
+    const errorMessage = error.message;
+    setLoginerror(errorMessage);
+    console.log(errorMessage);
+    
+  });
+}
+
+
     return (
         <div className='flex justify-center items-center bg-base-100 h-[800px]'>
         <div className='w-96 p-7'>
@@ -37,10 +86,13 @@ const SignUp = () => {
          <label className="label"> <span className="label-text">Forget Password</span></label>
         </div>
   <input className='btn btn-primary w-full' value='Sign Up' type="submit" />
+  <div>
+  {loginerror && <p className='text-primary'>{loginerror}Please give the right Email & Password</p>}
+ </div>
      </form>
      <p>Already Have an Account?<Link className='text-secondary' to='/login'>Login Here</Link></p>
      <div className="divider">OR</div>
-     <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+     <button  onClick={handleGoogle} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
         </div>
  
         </div>

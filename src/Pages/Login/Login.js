@@ -1,12 +1,50 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import './Login.css';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const Login = () => {
     const { register, handleSubmit,formState: { errors } } = useForm();
+    const {signInUser,signInGoogle} =useContext(AuthContext);
+    const [loginerror,setLoginerror]=useState('');
+    const navigate = useNavigate();
+    const location=useLocation();
+    const from=location.state?.from?.pathname || '/';
   const handleLogin = data =>{
     console.log(data);
+    setLoginerror('');
+    signInUser(data.email,data.password)
+    .then(res=>{
+      const user=res.user;
+      console.log(user);
+     navigate(from,{replace:true});
+     toast("User Login Successfully");
+  })
+  .catch((error) => {
+      
+      const errorMessage = error.message;
+      setLoginerror(errorMessage);
+      console.log(errorMessage);
+      
+    });
+
+    }
+    const handleGoogle =()=>{
+      signInGoogle()
+      .then(res=>{
+        const user=res.user;
+        console.log(user);
+        navigate(from,{replace:true})
+      })
+      .catch((error) => {
+      
+        const errorMessage = error.message;
+        setLoginerror(errorMessage);
+        console.log(errorMessage);
+        
+      });
   }
     return (
        <div className='flex justify-center items-center bg-base-100 h-[800px]'>
@@ -32,10 +70,14 @@ const Login = () => {
         <label className="label"> <span className="label-text">Forget Password</span></label>
        </div>
  <input className='btn btn-primary w-full' value='Login' type="submit" />
+
+ <div>
+  {loginerror && <p className='text-primary'>{loginerror}Please give the right Email & Password</p>}
+ </div>
     </form>
     <p>New to Doctor Service?<Link className='text-secondary' to='/signup'>Create an Account</Link></p>
     <div className="divider">OR</div>
-    <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+    <button onClick={handleGoogle}  className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
        </div>
 
        </div>

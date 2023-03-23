@@ -1,15 +1,23 @@
+import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import BookModal from '../BookModal/BookModal';
 
 const AvailableAppointment = ({date}) => {
-    const [treat,setTreat]=useState([]);
+    //const [treat,setTreat]=useState([]);
+
+    const {data:treat=[]}=useQuery({
+      queryKey:['treatment'],
+      queryFn:()=>
+      fetch('http://localhost:5000/treatment')
+      .then(res=>res.json())
+    })
    
-    useEffect( ()=>{
-        fetch('treatment.json')
-        .then(res=>res.json())
-        .then(data=>setTreat(data))
-    },[])
+    // useEffect( ()=>{
+    //     fetch('http://localhost:5000/treatment')
+    //     .then(res=>res.json())
+    //     .then(data=>setTreat(data))
+    // },[])
     return (
         <section className='mt-16'>
         <p className="text-center text-primary font-bold">Available Services on  {format(date,'PP')}</p>
@@ -33,7 +41,7 @@ const AvailableAppointment = ({date}) => {
      
       <label
 
-      onClick={()=>setTreat(treat)}
+      onClick={()=>treat}
 
       disabled={slots.length === 0}
       
@@ -48,7 +56,7 @@ const AvailableAppointment = ({date}) => {
     date={date}
   
    treat={treat}
-   setTreat={setTreat}
+   
    
    />}
 </div>

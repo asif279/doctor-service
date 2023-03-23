@@ -3,13 +3,13 @@ import { initializeApp } from "firebase/app";
 
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_apiKey,
-  authDomain: process.env.REACT_APP_authDomain,
-  projectId: process.env.REACT_APP_projectId,
-  storageBucket: process.env.REACT_APP_storageBucket,
-  messagingSenderId: process.env.REACT_APP_messagingSenderId,
-  appId: process.env.REACT_APP_appId,
-  measurementId: process.env.REACT_APP_measurementId,
+  apiKey: "AIzaSyAt8yYPcw4VnNHI2r0tnVyM2ikQ5abvCsY",
+  authDomain: "doctors-service-8d278.firebaseapp.com",
+  projectId: "doctors-service-8d278",
+  storageBucket: "doctors-service-8d278.appspot.com",
+  messagingSenderId: "112927601313",
+  appId: "1:112927601313:web:a1f914840cb48d978876e0",
+  measurementId: "G-1497XBS2MT"
 };
 
 // Initialize Firebase
