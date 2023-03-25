@@ -10,7 +10,7 @@ const SignUp = () => {
     const [loginerror,setLoginerror]=useState('');
     const navigate = useNavigate();
     const location=useLocation();
-    const from=location.state?.from?.pathname || '/appointment';
+    const from=location.state?.from?.pathname || '/';
   const handleSignUp = data =>{
     console.log(data);
     setLoginerror('');
@@ -25,7 +25,7 @@ const SignUp = () => {
         }
         updateUser(userInfo)
         .then(() => {
-          // Profile updated!
+          navigate('/');
           // ...
         }).catch((error) => {
           // An error occurred

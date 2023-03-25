@@ -19,7 +19,7 @@ const Navbar = () => {
     return (
       <div className="container">
         <div className="div1">
-        <h2 className='title'><Link to='/' >Doctors Service</Link></h2>
+        <h2 className='title'><Link to='/' >Dentist Service</Link></h2>
 
         </div>
         <div className="div2">

@@ -1,17 +1,26 @@
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
+import Laoding from '../../Shared/Loading/Laoding';
 import BookModal from '../BookModal/BookModal';
+import OptionAble from './OptionAble';
 
 const AvailableAppointment = ({date}) => {
-    //const [treat,setTreat]=useState([]);
+   // const [treat,setTreat]=useState([]);
+    const [opt,setOpt]=useState(null);
+    const datee=format(date,'PP');
 
-    const {data:treat=[]}=useQuery({
-      queryKey:['treatment'],
-      queryFn:()=>
-      fetch('http://localhost:5000/treatment')
-      .then(res=>res.json())
+    const {data:treat=[],refetch,isLoading}=useQuery({
+      queryKey:['treatment',datee],
+      queryFn:async()=>{
+    const res= await fetch(`http://localhost:5000/treatment?datee=${datee}`)
+      const data= await res.json();
+      return data}
     })
+
+    if(isLoading){
+      return <Laoding></Laoding>
+    }
    
     // useEffect( ()=>{
     //     fetch('http://localhost:5000/treatment')
@@ -25,46 +34,32 @@ const AvailableAppointment = ({date}) => {
   <div className='mt-5 grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
 
   {
-   treat && treat.map(({name,slots},index)=>{
 
-     
-
-        return (
-            <div className="card  bg-base-100 shadow-xl mx-4 my-4" key={index}>
-  <div className="card-body text-center mt-7">
-    <h2 className="font-bold text-center text-2xl">{name}</h2>
-    <p>{
-        slots.length > 0?slots[0]:'No Slots Avialable'
-    }</p>
-    <p>{slots.length} {slots.lenth>0?'Seats':'Seat'} Available</p>
-    <div className="card-actions justify-center">
-     
-      <label
-
-      onClick={()=>treat}
-
-      disabled={slots.length === 0}
-      
-      
-       htmlFor="booking-modal" className="btn btn-primary">Book Appointment</label>
-    </div>
-  </div>
-  {
-    treat &&
-    <BookModal
-
-    date={date}
-  
-   treat={treat}
-   
-   
-   />}
-</div>
-        )
-    })
+    treat.map(option=><OptionAble
+    
+    key={option._id}
+    option={option}
+    setOpt={setOpt}
+    refetch={refetch}
+    ></OptionAble>)
   }
+
+ 
+ 
+ 
     
   </div>
+ {opt &&
+  
+   <BookModal
+      
+      date={date}
+    
+       opt={opt}
+       setOpt={setOpt}
+     
+     
+     />}
             
         </section>
     );
