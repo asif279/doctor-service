@@ -4,17 +4,17 @@ import { Outlet } from 'react-router-dom';
 
 const DashboardLayout = () => {
     return (
-        <div>
+        <div className='bg-info'>
         <Navbar/>
         <div className="drawer drawer-mobile">
   <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
   <div className="drawer-content">
    <Outlet/>
-    <label htmlFor="dashboard-drawer" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+  
   
   </div> 
-  <div className="drawer-side">
-    <label htmlFor="dashboard-drawer" className="drawer-overlay"></label> 
+  <div className="drawer-side ">
+    <label bg-primary htmlFor="dashboard-drawer" className="drawer-overlay bg-primary "></label> 
     <ul className="menu p-4 w-80 bg-base-100 text-base-content">
    
       <li><a>Sidebar Item 1</a></li>
