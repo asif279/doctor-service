@@ -3,14 +3,20 @@ import { useForm } from "react-hook-form";
 import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {AuthContext} from '../../context/AuthProvider'
+import useToken from '../../hooks/useToken';
 
 const SignUp = () => {
     const { register, handleSubmit,formState: { errors } } = useForm();
     const {createUser,signInGoogle,updateUser} =useContext(AuthContext);
     const [loginerror,setLoginerror]=useState('');
+    const [cemail,setCemail]=useState('');
+    const [token]=useToken(cemail);
     const navigate = useNavigate();
     const location=useLocation();
     const from=location.state?.from?.pathname || '/';
+    if(token){
+      navigate('/');
+    }
   const handleSignUp = data =>{
     console.log(data);
     setLoginerror('');
@@ -66,25 +72,13 @@ const saveUser=(name,email)=>{
   .then(res=>res.json())
   .then(data=>{
     //console.log(data);
-  getUserToken(email)   
+  setCemail(email)   
   })
 
 
 }
 
-const getUserToken=email=>{
-  fetch(`http://localhost:5000/jwt?email=${email}`)
-  .then(res=>res.json())
-  .then(data=>{
-    if(data.accesToken){
-      localStorage.setItem('accessToken',data.accesToken)
 
-      navigate('/');
-  
-
-    }
-  })
-}
 
 
     return (
