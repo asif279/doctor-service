@@ -8,6 +8,7 @@ import Dashboard from '../Pages/Dshboard/Dashboard/Dashboard';
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import DashboardLayout from "../Layout/DashboardLayout";
 import MyApp from "../Pages/Dshboard/Dashboard/MyApp/MyApp";
+import Users from "../Pages/Dshboard/Users/Users";
 
 
 const router=createBrowserRouter([
@@ -43,6 +44,14 @@ const router=createBrowserRouter([
             {
                 path:'/dashboard',
                 element:<MyApp/>
+            },
+            {
+                path:'/dashboard',
+                element:<MyApp/>
+            },
+            {
+                path:'/dashboard/users',
+                element:<Users/>
             }
         ]
     }
