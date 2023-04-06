@@ -36,7 +36,8 @@ const MyApp = () => {
     <tbody>
       
     {
-       booked.map((booki,i)=>
+      booked &&
+       booked?.map((booki,i)=>
        <tr>
         <th>{i+1}</th>
         <td>{booki.patient}</td>

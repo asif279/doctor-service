@@ -50,7 +50,7 @@ const Users = () => {
       </tr>
     </thead>
     <tbody>
-      {/* row 1 */}
+     
      {
         user.map((users,i)=> <tr key={users._id}>
         <th>{i+1}</th>
